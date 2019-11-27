@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.IO;
 using NewInterfaceTest.Models.Db;
 using NewInterfaceTest.Models.DTOs;
+using NewInterfaceTest.Db.Models.DTOs;
 
 namespace Easyedu.Crm.Api.Client
 {
@@ -124,21 +125,7 @@ namespace Easyedu.Crm.Api.Client
             }
         }
 
-        /// <summary>
-        /// Получает всё расписание.
-        /// </summary>
-        /// <param name="shedule">Расписание.</param>
-        /// <returns>Ответ от сервера.</returns>
-        public HttpResponseMessage GetSheduleType(out bool shedule)
-        {
-            using (var client = createClient(_accessToken))
-            {
-                var response = client.GetAsync(_appPath + "/api/Shedule/GetType").Result;
-                var result = response.Content.ReadAsStringAsync().Result;
-                shedule = JsonConvert.DeserializeObject<bool>(result);
-                return response;
-            }
-        }
+
 
         public HttpResponseMessage GetOrganizations(out List<OrganizationDTO> notification)
         {
@@ -164,6 +151,20 @@ namespace Easyedu.Crm.Api.Client
                 return response;
             }
         }
+
+        public HttpResponseMessage PostCourse(ref CourseDTO notification)
+        {
+            using (var client = createClient(_accessToken))
+            {
+                var response = client.PostAsJsonAsync(_appPath + "/api/Courses", notification).Result;
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                notification = JsonConvert.DeserializeObject<CourseDTO>(result);
+
+                return response;
+            }
+        }
+
 
         /// <summary>
         /// HTTP-клиент с ключом доступа.

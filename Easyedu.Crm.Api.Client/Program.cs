@@ -19,6 +19,7 @@ namespace Easyedu.Crm.Api.Client
             Console.WriteLine("{0} - авторизация", databaseTest.AuthorizeTest());
             Console.WriteLine("{0} - получение списка организаци", databaseTest.GetOrganizationsTest());
             Console.WriteLine("{0} - создание организации", databaseTest.PostOrganizationTest());
+            Console.WriteLine("{0} - создание курса", databaseTest.PostCourseTest());
 
 
             Console.ReadKey();

@@ -1,4 +1,5 @@
-﻿using NewInterfaceTest.Models.DTOs;
+﻿using NewInterfaceTest.Db.Models.DTOs;
+using NewInterfaceTest.Models.DTOs;
 using System.Collections.Generic;
 using System.Net;
 
@@ -37,19 +38,37 @@ namespace Easyedu.Crm.Api.Client
 
         public bool GetOrganizationsTest()
         {
-            List<OrganizationDTO> shedule = new List<OrganizationDTO>();
+            List<OrganizationDTO> item = new List<OrganizationDTO>();
 
-            var response = _database.GetOrganizations(out shedule);
+            var response = _database.GetOrganizations(out item);
 
             return response.StatusCode == HttpStatusCode.OK ? true : false;
         }
 
+        private int _organizationId = 0;
         public bool PostOrganizationTest()
         {
-           OrganizationDTO shedule = new OrganizationDTO();
-            shedule.Name = "ТестАпи";
+           OrganizationDTO item = new OrganizationDTO();
+            item.Name = "ТестАпи";
 
-            var response = _database.PostOrganization(ref shedule);
+            var response = _database.PostOrganization(ref item);
+
+            _organizationId = item.OrganizationId;
+
+            return response.StatusCode == HttpStatusCode.OK ? true : false;
+        }
+
+        public bool PostCourseTest()
+        {
+            CourseDTO item = new CourseDTO()
+            {
+                Name = "ТестАпи Курс",
+                OrganizationId = _organizationId
+            };
+            item.Name = "ТестАпи Курс";
+
+            var response = _database.PostCourse(ref item);
+
 
             return response.StatusCode == HttpStatusCode.OK ? true : false;
         }
