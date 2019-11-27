@@ -16,7 +16,7 @@ namespace Easyedu.Crm.Api.Client
 
         public bool AuthorizeTest()
         {
-            var isAuthorized = _database.Authorize("", _password);
+            var isAuthorized = _database.Authorize("info@courseburg.ru", "CourseBurg24");
 
             return isAuthorized;
         }

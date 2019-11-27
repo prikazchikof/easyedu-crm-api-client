@@ -16,8 +16,9 @@ namespace Easyedu.Crm.Api.Client
 
             DatabaseTest databaseTest = new DatabaseTest();
 
+            Console.WriteLine("{0} - авторизация", databaseTest.AuthorizeTest());
             Console.WriteLine("{0} - получение списка организаци", databaseTest.GetOrganizationsTest());
-            Console.WriteLine("{0} - получение домашнего задания", databaseTest.PostOrganizationTest());
+            Console.WriteLine("{0} - создание организации", databaseTest.PostOrganizationTest());
 
 
             Console.ReadKey();
