@@ -65,10 +65,24 @@ namespace Easyedu.Crm.Api.Client
                 Name = "ТестАпи Курс",
                 OrganizationId = _organizationId
             };
-            item.Name = "ТестАпи Курс";
 
             var response = _database.PostCourse(ref item);
 
+
+            return response.StatusCode == HttpStatusCode.OK ? true : false;
+        }
+
+        public bool PostLeadTest()
+        {
+            LeadDTO item = new LeadDTO()
+            {
+                Name = "ТестАпи Заявка",
+                OrganizationId = _organizationId,
+                Comment = "Можно указать название курса",
+                Phone = "+79111647627"
+            };
+
+            var response = _database.PostLead(ref item);
 
             return response.StatusCode == HttpStatusCode.OK ? true : false;
         }

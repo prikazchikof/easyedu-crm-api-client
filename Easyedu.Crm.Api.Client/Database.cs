@@ -165,6 +165,19 @@ namespace Easyedu.Crm.Api.Client
             }
         }
 
+        public HttpResponseMessage PostLead(ref LeadDTO notification)
+        {
+            using (var client = createClient(_accessToken))
+            {
+                var response = client.PostAsJsonAsync(_appPath + "/api/Leads", notification).Result;
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                notification = JsonConvert.DeserializeObject<LeadDTO>(result);
+
+                return response;
+            }
+        }
+
 
         /// <summary>
         /// HTTP-клиент с ключом доступа.
