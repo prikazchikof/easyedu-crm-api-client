@@ -165,6 +165,28 @@ namespace Easyedu.Crm.Api.Client
             }
         }
 
+        public HttpResponseMessage EditCourse(CourseDTO notification)
+        {
+            using (var client = createClient(_accessToken))
+            {
+                var response = client.PutAsJsonAsync(_appPath + "/api/Courses", notification).Result;
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                return response;
+            }
+        }
+
+        public HttpResponseMessage DeleteCourse(int courseId)
+        {
+            using (var client = createClient(_accessToken))
+            {
+                var response = client.DeleteAsync(_appPath + "/api/Courses/" + courseId).Result;
+                var result = response.Content.ReadAsStringAsync().Result;
+
+                return response;
+            }
+        }
+
         public HttpResponseMessage PostLead(ref LeadDTO notification)
         {
             using (var client = createClient(_accessToken))

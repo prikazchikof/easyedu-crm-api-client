@@ -58,6 +58,7 @@ namespace Easyedu.Crm.Api.Client
             return response.StatusCode == HttpStatusCode.OK ? true : false;
         }
 
+        private int _courseId = 0;
         public bool PostCourseTest()
         {
             CourseDTO item = new CourseDTO()
@@ -67,7 +68,29 @@ namespace Easyedu.Crm.Api.Client
             };
 
             var response = _database.PostCourse(ref item);
+            _courseId = item.CourseId;
 
+            return response.StatusCode == HttpStatusCode.OK ? true : false;
+        }
+
+        public bool EditCourseTest()
+        {
+            CourseDTO item = new CourseDTO()
+            {
+                Name = "ТестАпи Курс ред",
+                OrganizationId = _organizationId,
+                CourseId = _courseId
+            };
+
+            var response = _database.EditCourse(item);
+
+
+            return response.StatusCode == HttpStatusCode.OK ? true : false;
+        }
+
+        public bool DeleteCourseTest()
+        {
+            var response = _database.DeleteCourse(_courseId);
 
             return response.StatusCode == HttpStatusCode.OK ? true : false;
         }
@@ -76,10 +99,10 @@ namespace Easyedu.Crm.Api.Client
         {
             LeadDTO item = new LeadDTO()
             {
-                Name = "ТестАпи Заявка",
-                OrganizationId = _organizationId,
-                Comment = "Можно указать название курса",
-                Phone = "+79111647627"
+                //Name = "ТестАпи Заявка",
+                //Comment = "Можно указать название курса",
+                Phone = "+79111647627",
+                CourseId = 12
             };
 
             var response = _database.PostLead(ref item);
